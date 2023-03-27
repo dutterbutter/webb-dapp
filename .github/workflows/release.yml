@@ -1,0 +1,69 @@
+name: "Release"
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  pre-ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: 'Block Concurrent Executions'
+        uses: softprops/turnstyle@v1
+        with:
+          poll-interval-seconds: 10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  Build-Publish:
+    name: Build-Publish
+    needs: pre-ci
+    if: "!startsWith(github.event.head_commit.message, '[SKIP CI]') && startsWith(github.event.head_commit.message, '[RELEASE]') && github.repository == 'dutterbutter/webb-dapp'"
+    runs-on: ubuntu-latest
+    steps:
+      #Check out
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+    #Identify changes
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-hubble
+        with:
+          paths: apps/bridge-dapp
+
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-stats
+        with:
+          paths: apps/stats-dapp
+
+      - run: yarn install
+
+      - name: build
+        run: yarn build:bridge
+
+      #Publish to npm and github releases
+      - name: Release hubble
+        if: steps.changed-hubble.outputs.changed == 'true'
+        uses: ./.github/actions/create-release
+        with:
+          package-path: apps/bridge-dapp
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
+
+      - name: Release stats
+        if: steps.changed-stats.outputs.changed == 'true'
+        uses: ./.github/actions/create-release
+        with:
+          package-path: apps/stats-dapp
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
