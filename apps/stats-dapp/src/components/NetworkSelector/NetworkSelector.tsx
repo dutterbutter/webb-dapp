@@ -76,7 +76,7 @@ export const NetworkSelector: FC<NetworkSelectorProps> = ({
     } else {
       notificationApi({
         variant: 'warning',
-        message: 'Please enter valid endpoints',
+        message: 'Please enter valid endpoint',
       });
     }
   };
