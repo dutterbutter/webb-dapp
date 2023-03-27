@@ -57,7 +57,7 @@ jobs:
         uses: ./.github/actions/create-release
         with:
           package-path: apps/bridge-dapp
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.REPO_TOKEN }}
           # npm-token: ${{ secrets.NPM_TOKEN }}
 
       - name: Release stats
@@ -65,5 +65,5 @@ jobs:
         uses: ./.github/actions/create-release
         with:
           package-path: apps/stats-dapp
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.REPO_TOKEN }}
           # npm-token: ${{ secrets.NPM_TOKEN }}

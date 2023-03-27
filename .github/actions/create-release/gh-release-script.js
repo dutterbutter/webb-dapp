@@ -64,7 +64,7 @@ async function publishRelease(releaseInfo) {
 
     await request('POST /repos/{owner}/{repo}/releases', {
         headers: {
-            authorization: `token ${process.env.GITHUB_TOKEN}`,
+            authorization: `token ${process.env.REPO_TOKEN}`,
         },
         owner: 'dutterbutter',
         name: `[${version}] ${repoName}`,
