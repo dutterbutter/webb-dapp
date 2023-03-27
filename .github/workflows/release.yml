@@ -57,13 +57,13 @@ jobs:
         uses: ./.github/actions/create-release
         with:
           package-path: apps/bridge-dapp
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # npm-token: ${{ secrets.NPM_TOKEN }}
 
       - name: Release stats
         if: steps.changed-stats.outputs.changed == 'true'
         uses: ./.github/actions/create-release
         with:
           package-path: apps/stats-dapp
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # npm-token: ${{ secrets.NPM_TOKEN }}
