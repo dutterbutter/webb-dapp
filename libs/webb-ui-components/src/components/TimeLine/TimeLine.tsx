@@ -11,7 +11,7 @@ import { TimeLineProps } from './types';
  * ```jsx
  *    <TimeLine>
  *      <TimeLineItem
- *        title='Proposed'
+ *        title='Propose'
  *        time={randRecentDate()}
  *        txHash={randEthereumAddress()}
  *        externalUrl='https://webb.tools'

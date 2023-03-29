@@ -16,7 +16,7 @@ import { Typography } from '../../typography';
  * - `buttonClassName`: `Optional`. The class name to pass into the button
  *
  * ```jsx
-      <Banner dappName='bridge' bannerText='Hubble Bridge is in beta version.' buttonText='Report Bug' onClose={onCloseHandler}>
+      <Banner dappName='Hubble' bannerText='Hubble Bridge is in beta version.' buttonText='Report Bug' onClose={onCloseHandler}>
   </Banner>
  * ```
  */
