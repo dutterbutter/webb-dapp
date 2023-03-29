@@ -8,7 +8,7 @@ All logs must start with the format: [x.y.z] - yyyy-mm-dd
 
 ## [Unreleased]
 
-## [0.0.3] - 2023-03-27
+## [0.0.4] - 2023-03-27
 
 ### Test
 - Test release
