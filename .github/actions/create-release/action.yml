@@ -17,13 +17,13 @@ runs:
   using: "composite"
   steps:
     - working-directory: ${{ inputs.package-path }}
+      if:  ${{ inputs.npm-token }} != ''
       run: echo "Changes exist in ${{ inputs.package-path }}" && yarn npm publish --access public 
       env:
         NPM_TOKEN: ${{ inputs.npm-token }}
       shell: bash
 
     - working-directory: ${{ github.workspace }}
-      if:  ${{ inputs.repo-token }} != ''
       run: node ${{ github.action_path }}/gh-release-script.js ${{ github.workspace }}/${{ inputs.package-path }}
       env: 
         REPO_TOKEN: ${{ inputs.repo-token }}
